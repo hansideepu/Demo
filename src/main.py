@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
+
 app = Flask(__name__)
 
 
@@ -8,9 +9,9 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
-    return render_template("login.html")
+    return render_template('login.html')
 
 
 @app.route("/logout")
@@ -22,10 +23,10 @@ def logout():
 def submit():
     if request.method == 'POST':
         user = request.form['nm']
-        return f"Login successful, Hello {user}"
+        return render_template("submit.html", u=user)
     else:
         user = request.args.get('nm')
-        return f"Login successful, Hello {user}"
+        return render_template("submit.html", u=user)
 
 
 if __name__ == "__main__":
