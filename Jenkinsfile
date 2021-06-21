@@ -7,7 +7,6 @@ pipeline{
         stage('Building image') {
             steps{
                 script {
-                    sh 'docker build -t docker-repo .'
                     dockerImage = docker.build registry
                 }
             }
