@@ -11,7 +11,6 @@ pipeline{
                 }
             }
         }
-
         stage('Pushing to ECR') {
             steps{
                 script {
@@ -20,14 +19,12 @@ pipeline{
                 }
             }
         }
-
         stage('Stop previous containers') {
             steps {
                 sh 'docker ps -f name=mypythonContainer -q | xargs --no-run-if-empty docker container stop'
                 sh 'docker container ls -a -fname=mypythonContainer -q | xargs -r docker container rm'
             }
         }
-
         stage('Docker Run') {
             steps{
                 script {
